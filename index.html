@@ -13,12 +13,16 @@
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=4df2f926f75b8656c89fd41d0c7301f5"></script>
     <script>
       var params = new URLSearchParams(window.location.search);
+      var lat = parseFloat(params.get('lat'));
+      var lng = parseFloat(params.get('lng'));
+      var level = parseInt(params.get('level'), 10);
+
       var map = new kakao.maps.Map(document.getElementById('map'), {
         center: new kakao.maps.LatLng(
-          params.get('lat') ?? 37.5665,
-          params.get('lng') ?? 126.978
+          isNaN(lat) ? 37.5665 : lat,
+          isNaN(lng) ? 126.978 : lng
         ),
-        level: params.get('level') ?? 3
+        level: isNaN(level) ? 3 : level
       });
     </script>
   </body>
